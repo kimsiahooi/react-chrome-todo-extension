@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "React Chrome To-Do",
+  "version": "1.0.0",
+  "description": "A simple and clean to-do list extension! Coded by OKS",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage"],
+  "icons": {
+    "32": "vite.svg"
+  }
+}

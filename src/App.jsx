@@ -13,16 +13,22 @@ const App = () => {
     }
   }, []);
 
-  const addTaskFromInput = () => {
-    const taskValue = inputRef.current.value;
-    if (taskValue) {
-      setTasks((prev) => {
-        const temp = [...prev, { id: nanoid(), name: taskValue, isComplete: false }];
-        localStorage.setItem('oks-todo-extension', JSON.stringify(temp));
+  const addTaskFromInput = (e) => {
+    const addTask = () => {
+      const taskValue = inputRef.current.value;
+      if (taskValue) {
+        setTasks((prev) => {
+          const temp = [...prev, { id: nanoid(), name: taskValue, isComplete: false }];
+          localStorage.setItem('oks-todo-extension', JSON.stringify(temp));
 
-        return temp;
-      });
-      inputRef.current.value = '';
+          return temp;
+        });
+        inputRef.current.value = '';
+      }
+    };
+
+    if ((e && e.type === 'keydown' && e.key === 'Enter') || e.type === 'click') {
+      addTask();
     }
   };
 
@@ -70,6 +76,7 @@ const App = () => {
           placeholder="Add a new task..."
           className="p-[10px] w-full mb-[10px] border border-solid border-[#ddd] rounded outline-none"
           ref={inputRef}
+          onKeyDown={(e) => addTaskFromInput(e)}
         />
         <button
           id="add-task"
